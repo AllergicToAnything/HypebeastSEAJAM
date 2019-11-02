@@ -12,9 +12,4 @@ public class EnemyListData : ScriptableObject
         int enemyID = Random.Range(0, enemyList.Length);
         return enemyList[enemyID];
     }
-
-    public BaseEnemy GetEnemy(int id)
-    {
-        return enemyList[id];
-    }
 }
