@@ -7,6 +7,7 @@ public class EnemySpawnerAndManager : MonoBehaviour
     BaseEnemy[] SpawnedEnemies;
     public IconSpriteListData iconSpriteList;
     public EnemyListData enemyList;
+    public GameObject target;
     public float SpawnTimer;
     float defSpawnTimer;
     public bool AllowSpawn;
@@ -48,6 +49,7 @@ public class EnemySpawnerAndManager : MonoBehaviour
         Object enemyObject = enemyList.GetRandomEnemy();
         Vector3 spawnPosition = RandomPointInBounds(SpawnArea.bounds);
         BaseEnemy spawnedEnemy = (BaseEnemy)Instantiate(enemyObject, spawnPosition, Quaternion.identity);
+        //spawnedEnemy.SetTarget(gameObject);
         //Sprite spawnedSprite = iconSpriteList.GetRandomSprite();
        // spawnedEnemy.SetSprite(spawnedSprite);
     }

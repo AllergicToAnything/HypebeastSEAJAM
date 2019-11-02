@@ -18,7 +18,7 @@ public class FastIconEnemy : BaseEnemy
     {
         if(DoOnce == false)
         {
-            posOffset = target.transform.position;
+            tempPos = target.transform.position;
             directionVel = target.transform.position - transform.position;
             directionVel.Normalize();
             directionVel *= enemyData.speed;

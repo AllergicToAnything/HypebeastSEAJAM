@@ -12,7 +12,7 @@ public class SlowIconEnemy : BaseEnemy
     // Update is called once per frame
     void Update()
     {
-        if(Stop == false)
+        if(Stop == false && target != null)
         {
             float step = enemyData.speed * Time.deltaTime;
             tempPos = Vector3.MoveTowards(transform.position, target.transform.position, step);
