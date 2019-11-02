@@ -6,21 +6,17 @@ public class BaseEnemy : MonoBehaviour
 {
     public Vector3 enemyPos;
     public EnemyData enemyData;
-
-
     public GameObject target;
-    public Transform targetPosTransform;
     public Vector3 targetPos;
+    public SpriteRenderer spriteRenderer;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSprite(Sprite sprite)
     {
-        
+        spriteRenderer.sprite = sprite;
     }
 }
