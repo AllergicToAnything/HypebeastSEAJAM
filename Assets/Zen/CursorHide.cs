@@ -6,7 +6,7 @@ public enum CursorStates {ShowCursor,HideCursor }
 public class CursorHide : MonoBehaviour
 {
     public CursorStates cursorStates = CursorStates.HideCursor;
-    CursorLockMode CLM = CursorLockMode.Locked;
+   // CursorLockMode CLM = CursorLockMode.Locked;
 
     // Update is called once per frame
     void Update()
@@ -15,12 +15,12 @@ public class CursorHide : MonoBehaviour
         if(cursorStates == CursorStates.HideCursor)
         {
             Cursor.visible = false;
-            CLM = CursorLockMode.Locked;
+            //CLM = CursorLockMode.Locked;
         }
         else if ( cursorStates == CursorStates.ShowCursor)
         {
             Cursor.visible = true;
-            CLM = CursorLockMode.Confined;
+           // CLM = CursorLockMode.Confined;
         }
     }
 }
