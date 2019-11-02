@@ -93,28 +93,31 @@ public class PlayerController : MonoBehaviour
     {
         
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        if (Input.GetButton("Jump"))
+        if (m_Grounded)
         {
-            if (!addJumpForce)
+            if (Input.GetButton("Jump"))
             {
-                jump = true;
-                if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
+                animator.Play("PlayerJumpAnticipation");
+                if (!addJumpForce)
                 {
-                    jumpCD -= Time.deltaTime;
-                    m_JumpForce += addForcePerSecond * Time.deltaTime;
-                }
+                    jump = true;
+                    if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
+                    {
+                        jumpCD -= Time.deltaTime;
+                        m_JumpForce += addForcePerSecond * Time.deltaTime;
+                    }
 
-                if (jumpCD <= 0)
-                {
-                    runSpeed = 0;
-                }
-                runSpeed = initRunSpeed;
-                if (jump)
-                {
-                    addJumpForce = true;
-                    Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+                    if (jumpCD <= 0)
+                    {
+                        runSpeed = 0;
+                    }
+                    runSpeed = initRunSpeed;
+                    if (jump)
+                    {
+                        addJumpForce = true;
+                        Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 
+                    }
                 }
             }
         }

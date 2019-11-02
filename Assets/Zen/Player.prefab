@@ -91,7 +91,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5949278702418417691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.14, y: -2.84, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 5949278702345093289}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_JumpForce: 150
   jumpCD: 0.3
-  maxJumpForce: 1200
+  maxJumpForce: 800
   addForcePerSecond: 200
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
