@@ -7,6 +7,7 @@ public class Notification : MonoBehaviour
     public float notificationShrinkageRatio = 0.2f;
     public float shrinkSpeed = 0.1f;
     public float scaleThreshold = 0.1f;
+    public float notificationStayDuration = 2;
 
     private Camera mainCam;
     private bool isOverNotification;
@@ -14,10 +15,13 @@ public class Notification : MonoBehaviour
     private Vector3 velocity;
     private Vector3 objectCurrentPosition;
     private Vector3 objectTargetPosition;
+    private Vector3 startPos = new Vector3(0, 4, 0);
+    private Vector3 endPos = new Vector3(0, 6, 0);
 
     void Start()
     {
         mainCam = Camera.main;
+        StartCoroutine(RetractNotification());
     }
 
     void Update()
@@ -29,7 +33,9 @@ public class Notification : MonoBehaviour
         //This grabs the position of the object in the world and turns it into the position on the screen
         //Sets the mouse pointers vector3
         mousePreviousLocation = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        StopAllCoroutines();
         StartCoroutine(Shrink());
+        
     }
 
     // void OnMouseDrag() {
@@ -65,6 +71,28 @@ public class Notification : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+
+    IEnumerator RetractNotification(){
+        float progress = 0;
+
+        while(progress < notificationStayDuration){
+            progress += Time.deltaTime;
+
+            if (progress >= notificationStayDuration){
+                float lerpProgress = 0;
+                while (lerpProgress < 1){
+                    lerpProgress += Time.deltaTime;
+                    transform.position = Vector3.Lerp(startPos, endPos, lerpProgress);
+                    yield return null;
+                }
+                Destroy(this.gameObject);
+            }
+
+            
+
+            yield return null;
+        }
     }
 
 
