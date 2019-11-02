@@ -19,9 +19,11 @@ public class PlayerController : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
-    float horizontalMove = 0f;
+
     public float runSpeed = 40f;
     bool jump = false;
+    float horizontalMove = 0f;
+
 
     [Header("Events")]
     [Space]
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public BoolEvent OnCrouchEvent;
     private bool m_wasCrouching = false;
+
 
     private void Awake()
     {
@@ -47,10 +50,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
-
+        
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -64,17 +66,18 @@ public class PlayerController : MonoBehaviour
             }
         }
         Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        jump = false;
-
-
     }
     private void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal")*runSpeed;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            jump = false;
         }
     }
 
@@ -162,7 +165,5 @@ public class PlayerController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-
-    
     
 }
