@@ -3,7 +3,13 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [SerializeField] private float m_JumpForce = 200f;                          // Amount of force added when the player jumps.
+    private float initJF;
+    [SerializeField]
+    private float jumpCD = 1;
+    private bool addJumpForce = false;
+    private float initJUMPCD;
+    [SerializeField] private float addForce = 50f;
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -47,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
         if (OnCrouchEvent == null)
             OnCrouchEvent = new BoolEvent();
+        initJF = m_JumpForce;
+        initJUMPCD = jumpCD;
     }
 
     private void FixedUpdate()
@@ -70,21 +78,38 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         
-        if (Input.GetButtonDown("Jump"))
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        if (Input.GetButton("Jump"))
+        {
+            if (!addJumpForce)
+            {
+                if (jumpCD > 0)
+                {
+                    jumpCD -= Time.deltaTime;
+                }
+                
+                if (jumpCD <= 0)
+                {
+                    runSpeed *= .5f;
+                    m_JumpForce += addForce;
+                    addJumpForce = true;
+                }
+                m_JumpForce = initJF;
+            }
+        }
+        if (Input.GetButtonUp("Jump"))
         {
             jump = true;
             if (jump)
-                animator.Play("PlayerJumpHang");
-            
-            
-        }
-       
-        if (Input.GetButtonUp("Jump"))
-        {
+                Move(horizontalMove * Time.fixedDeltaTime, false, jump);
             jump = false;
+            jumpCD = initJUMPCD;
+            addJumpForce = false;
+            
         }
+
         if (m_Grounded)
         {
             if (Input.GetAxis("Horizontal") != 0)
@@ -95,6 +120,10 @@ public class PlayerController : MonoBehaviour
             {
                 animator.Play("PlayerIdle");
             }
+        }
+        else
+        {
+                animator.Play("PlayerJumpHang");
         }
     }
 
