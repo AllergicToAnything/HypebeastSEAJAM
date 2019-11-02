@@ -16,12 +16,13 @@ public class FastIconEnemy : BaseEnemy
     // Update is called once per frame
     void Update()
     {
-        if(DoOnce == false)
+        if (DoOnce == false)
         {
             tempPos = target.transform.position;
             directionVel = target.transform.position - transform.position;
             directionVel.Normalize();
             directionVel *= enemyData.speed;
+            spriteRenderer.sprite = sprite;
             DoOnce = true;
         }
 

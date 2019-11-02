@@ -8,6 +8,7 @@ public class BaseEnemy : MonoBehaviour
     public EnemyData enemyData;
     public GameObject target;
     public SpriteRenderer spriteRenderer;
+    public Sprite sprite;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class BaseEnemy : MonoBehaviour
 
     public void SetSprite(Sprite sprite)
     {
-        spriteRenderer.sprite = sprite;
+        //spriteRenderer.sprite = sprite;
     }
     public void SetTarget(GameObject tar)
     {

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FastIconEnemyData
   m_EditorClassIdentifier: 
   enemySprite: {fileID: 0}
-  enemyData: 0
-  speed: 0
+  enemyDamage: 0
+  speed: 100

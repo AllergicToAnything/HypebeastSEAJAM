@@ -8,11 +8,17 @@ public class SlowIconEnemy : BaseEnemy
     public float frequency = 1f;
     Vector3 tempPos = new Vector3();
     bool Stop = false;
+    bool DoOnce = false;
     
     // Update is called once per frame
     void Update()
     {
-        if(Stop == false && target != null)
+        if(DoOnce == false)
+        {
+            spriteRenderer.sprite = sprite;
+        }
+
+        if (Stop == false && target != null)
         {
             float step = enemyData.speed * Time.deltaTime;
             tempPos = Vector3.MoveTowards(transform.position, target.transform.position, step);

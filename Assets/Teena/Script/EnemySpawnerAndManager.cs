@@ -48,9 +48,8 @@ public class EnemySpawnerAndManager : MonoBehaviour
     {
         Object enemyObject = enemyList.GetRandomEnemy();
         Vector3 spawnPosition = RandomPointInBounds(SpawnArea.bounds);
+        Sprite spawnedSprite = iconSpriteList.GetRandomSprite();
         BaseEnemy spawnedEnemy = (BaseEnemy)Instantiate(enemyObject, spawnPosition, Quaternion.identity);
-        //spawnedEnemy.SetTarget(gameObject);
-        //Sprite spawnedSprite = iconSpriteList.GetRandomSprite();
-       // spawnedEnemy.SetSprite(spawnedSprite);
+        spawnedEnemy.sprite = spawnedSprite;
     }
 }
