@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     private float jumpCD = 1;
     private bool addJumpForce = false;
     private float initJUMPCD;
-    [SerializeField] private float addForce = 50f;
+    [SerializeField] private float maxJumpForce = 50f;
+    [SerializeField] private float addForcePerSecond = 1f;
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -27,8 +28,16 @@ public class PlayerController : MonoBehaviour
     Animator animator;
 
     public float runSpeed = 40f;
-    bool jump = false;
+    float initRunSpeed;
+    bool jump = false;    
     float horizontalMove = 0f;
+
+    public bool ableToAttack = true;
+    bool attack = false;
+    public float attackCD = .8f;
+    float initAttackCD;
+    public GameObject bulletSpawner;
+    public PlayerBullet playerBullet;
 
 
     [Header("Events")]
@@ -55,6 +64,8 @@ public class PlayerController : MonoBehaviour
             OnCrouchEvent = new BoolEvent();
         initJF = m_JumpForce;
         initJUMPCD = jumpCD;
+        initRunSpeed = runSpeed;
+        initAttackCD = attackCD;
     }
 
     private void FixedUpdate()
@@ -76,6 +87,8 @@ public class PlayerController : MonoBehaviour
         }
         Move(horizontalMove * Time.fixedDeltaTime, false, jump);
     }
+
+
     private void Update()
     {
         
@@ -85,33 +98,43 @@ public class PlayerController : MonoBehaviour
         {
             if (!addJumpForce)
             {
-                if (jumpCD > 0)
+                
+                if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
                 {
                     jumpCD -= Time.deltaTime;
+                    m_JumpForce += addForcePerSecond*Time.deltaTime;
                 }
                 
                 if (jumpCD <= 0)
                 {
-                    runSpeed *= .5f;
-                    m_JumpForce += addForce;
-                    addJumpForce = true;
+                    runSpeed = 0;                    
                 }
-                m_JumpForce = initJF;
+                runSpeed = initRunSpeed;
+                
             }
         }
         if (Input.GetButtonUp("Jump"))
         {
+            addJumpForce = true;
             jump = true;
             if (jump)
+            {
                 Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-            jump = false;
-            jumpCD = initJUMPCD;
-            addJumpForce = false;
+                jump = false;
+                jumpCD = initJUMPCD;
+                m_JumpForce = initJF;
+                addJumpForce = false;
+            }
             
+        }
+        if (!m_Grounded)
+        {
+            m_Rigidbody2D.gravityScale += .05f;
         }
 
         if (m_Grounded)
         {
+            m_Rigidbody2D.gravityScale = 1;
             if (Input.GetAxis("Horizontal") != 0)
             {
                 animator.Play("PlayerWalking");
@@ -125,8 +148,40 @@ public class PlayerController : MonoBehaviour
         {
                 animator.Play("PlayerJumpHang");
         }
+
+        if (ableToAttack)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Attack(attackCD, attack);
+            }
+        }
+
     }
 
+    public void Attack(float attackCD, bool attack )
+    {
+        if (attackCD > 0)
+        {
+            attackCD -= Time.deltaTime;
+        }
+        if (attackCD <= 0)
+        {
+            attack = true;
+        }
+        if (attack)
+        {
+            animator.Play("PlayerAttack");
+            if (attackCD <= 0)
+            {
+                Instantiate(playerBullet, bulletSpawner.transform);
+                attack = false;
+                attackCD = initAttackCD;
+            }
+        }
+    }
+
+   
 
     public void Move(float move, bool crouch, bool jump)
     {
