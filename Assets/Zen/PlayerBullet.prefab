@@ -99,7 +99,7 @@ MonoBehaviour:
   xVelocity: 5
   yVelocity: 5
   playerController: {fileID: 0}
-  thisCollider: {fileID: 0}
+  thisCollider: {fileID: 558270264}
 --- !u!50 &558270266
 Rigidbody2D:
   serializedVersion: 4
