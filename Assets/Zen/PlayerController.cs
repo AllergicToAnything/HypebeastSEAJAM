@@ -98,33 +98,34 @@ public class PlayerController : MonoBehaviour
         {
             if (!addJumpForce)
             {
-                
+                jump = true;
                 if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
                 {
                     jumpCD -= Time.deltaTime;
-                    m_JumpForce += addForcePerSecond*Time.deltaTime;
+                    m_JumpForce += addForcePerSecond * Time.deltaTime;
                 }
-                
+
                 if (jumpCD <= 0)
                 {
-                    runSpeed = 0;                    
+                    runSpeed = 0;
                 }
                 runSpeed = initRunSpeed;
-                
+                if (jump)
+                {
+                    addJumpForce = true;
+                    Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+
+                }
             }
         }
         if (Input.GetButtonUp("Jump"))
         {
-            addJumpForce = true;
-            jump = true;
-            if (jump)
-            {
-                Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+            
                 jump = false;
                 jumpCD = initJUMPCD;
                 m_JumpForce = initJF;
-                addJumpForce = false;
-            }
+               addJumpForce = false;
+            
             
         }
         if (!m_Grounded)

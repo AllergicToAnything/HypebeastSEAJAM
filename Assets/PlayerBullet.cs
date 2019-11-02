@@ -19,18 +19,21 @@ public class PlayerBullet : MonoBehaviour
 
     void Projectile()
     {
-        if (playerController.m_FacingRight)
+        if (playerController)
         {
-            rb.velocity = new Vector2(xVelocity, yVelocity);
-        }
-        if (!playerController.m_FacingRight)
-        {
-            rb.velocity = new Vector2(-xVelocity, yVelocity);
+            if (playerController.m_FacingRight)
+            {
+                rb.velocity = new Vector2(xVelocity, yVelocity);
+            }
+            if (!playerController.m_FacingRight)
+            {
+                rb.velocity = new Vector2(-xVelocity, yVelocity);
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {if(collision.gameObject!=this.gameObject)
+    {if(collision.gameObject!=this.gameObject||collision.gameObject.tag == "Player")
         Destroy(gameObject);
     }
 
