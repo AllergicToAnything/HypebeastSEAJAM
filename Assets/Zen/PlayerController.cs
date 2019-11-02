@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
     Animator animator;
 
@@ -98,33 +98,34 @@ public class PlayerController : MonoBehaviour
         {
             if (!addJumpForce)
             {
-                
+                jump = true;
                 if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
                 {
                     jumpCD -= Time.deltaTime;
-                    m_JumpForce += addForcePerSecond*Time.deltaTime;
+                    m_JumpForce += addForcePerSecond * Time.deltaTime;
                 }
-                
+
                 if (jumpCD <= 0)
                 {
-                    runSpeed = 0;                    
+                    runSpeed = 0;
                 }
                 runSpeed = initRunSpeed;
-                
+                if (jump)
+                {
+                    addJumpForce = true;
+                    Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+
+                }
             }
         }
         if (Input.GetButtonUp("Jump"))
         {
-            addJumpForce = true;
-            jump = true;
-            if (jump)
-            {
-                Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+            
                 jump = false;
                 jumpCD = initJUMPCD;
                 m_JumpForce = initJF;
-                addJumpForce = false;
-            }
+               addJumpForce = false;
+            
             
         }
         if (!m_Grounded)
@@ -151,34 +152,32 @@ public class PlayerController : MonoBehaviour
 
         if (ableToAttack)
         {
+            if (attackCD > 0)
+            {
+                attackCD -= Time.deltaTime;
+            }
             if (Input.GetMouseButton(0))
             {
-                Attack(attackCD, attack);
+                
+                if (attackCD <= 0)
+                {
+                    attack = true;
+                }
+                if (attack)
+                {
+                    Attack();
+                }
             }
         }
 
     }
 
-    public void Attack(float attackCD, bool attack )
+    public void Attack()
     {
-        if (attackCD > 0)
-        {
-            attackCD -= Time.deltaTime;
-        }
-        if (attackCD <= 0)
-        {
-            attack = true;
-        }
-        if (attack)
-        {
-            animator.Play("PlayerAttack");
-            if (attackCD <= 0)
-            {
-                Instantiate(playerBullet, bulletSpawner.transform);
-                attack = false;
-                attackCD = initAttackCD;
-            }
-        }
+        GameObject bullet = Instantiate(playerBullet.gameObject, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
+        attack = false;
+        attackCD = initAttackCD;
+        animator.Play("PlayerAttack");
     }
 
    
