@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Notification : MonoBehaviour
 {
+    public float gravity = -9.81f;
+    public float speedMultiplier = 10;
 
     private Camera mainCam;
     private bool isOverNotification;
-
-    public Vector3 mousePreviousLocation;
-    public Vector3 velocity;
-    public Vector3 objectCurrentPosition;
-    public Vector3 objectTargetPosition;
-    public float topSpeed = 10;
+    private Vector3 mousePreviousLocation;
+    private Vector3 velocity;
+    private Vector3 objectCurrentPosition;
+    private Vector3 objectTargetPosition;
 
     void Start()
     {
@@ -21,6 +21,9 @@ public class Notification : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<Rigidbody2D>() != null){
+            gameObject.transform.right = GetComponent<Rigidbody2D>().velocity;
+        }
         
     }
 
@@ -52,13 +55,11 @@ public class Notification : MonoBehaviour
         } 
 
         rb2D.bodyType = RigidbodyType2D.Dynamic;
-        print(velocity);
-        // GetComponent<Rigidbody2D>().velocity = velocity;
-        gameObject.transform.right = velocity;
+        
         GetComponent<Rigidbody2D>().gravityScale = 1;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(velocity.x, velocity.y) + new Vector2(0, -5));
-        if (velocity.magnitude > topSpeed){
-            velocity = GetComponent<Rigidbody2D>().velocity.normalized * topSpeed;
-        }
+        Vector2 throwVector = velocity*speedMultiplier;
+        Vector2 gravityVector = new Vector2(0, gravity);
+        GetComponent<Rigidbody2D>().AddForce(throwVector + gravityVector);
+        
     }
 }
