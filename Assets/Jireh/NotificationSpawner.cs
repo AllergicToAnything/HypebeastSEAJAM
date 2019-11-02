@@ -21,9 +21,7 @@ public class NotificationSpawner : MonoBehaviour
  
      // Update is called once per frame
     void Update () {
-        Vector3 screenToWorldPoint = mainCam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-        Vector3 screenToWorldPointFixed = new Vector3(screenToWorldPoint.x, screenToWorldPoint.y, 0);
-        pointer.transform.position = screenToWorldPointFixed;
+        
     }
 
 
