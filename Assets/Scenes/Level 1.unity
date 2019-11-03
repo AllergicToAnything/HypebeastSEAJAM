@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 5949278702418417688, guid: e6c28d1efcc791846ae3d96a39b7de6c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5949278702418417688, guid: e6c28d1efcc791846ae3d96a39b7de6c,
         type: 3}
@@ -275,6 +275,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.22700001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: ableToAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: runSpeed
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: addForcePerSecond
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: attackCD
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c28d1efcc791846ae3d96a39b7de6c, type: 3}
@@ -1191,7 +1211,7 @@ Transform:
   - {fileID: 402120454}
   - {fileID: 1207947639}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533882659
 GameObject:
@@ -1271,7 +1291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533882659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.15, y: 6.34, z: -10}
+  m_LocalPosition: {x: -5.1352296, y: 2.96, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2171,6 +2191,7 @@ GameObject:
   - component: {fileID: 965513142}
   - component: {fileID: 965513145}
   - component: {fileID: 965513144}
+  - component: {fileID: 965513146}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -2223,13 +2244,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965513141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.15, y: 6.34, z: -10}
+  m_LocalPosition: {x: -5.1352296, y: 2.96, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1036965994}
   - {fileID: 1457512625}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &965513144
 MonoBehaviour:
@@ -2291,6 +2312,20 @@ MonoBehaviour:
   yStart: 6
   yEnd: 4
   isSpawning: 1
+--- !u!114 &965513146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965513141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Offset: {x: 0, y: 0, z: 0}
+  m_ApplyAfter: 1
 --- !u!1 &1036965993
 GameObject:
   m_ObjectHideFlags: 3
@@ -2335,20 +2370,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 10
-  m_LookaheadIgnoreY: 0
+  m_LookaheadTime: 0.5
+  m_LookaheadSmoothing: 30
+  m_LookaheadIgnoreY: 1
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_ScreenX: 0.5
-  m_ScreenY: 0.781
+  m_ScreenX: 0.4991695
+  m_ScreenY: 0.443
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.28
+  m_DeadZoneHeight: 0.676
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
+  m_SoftZoneWidth: 1
   m_SoftZoneHeight: 1
   m_BiasX: 0
   m_BiasY: 0
@@ -3366,7 +3401,7 @@ Transform:
   - {fileID: 2063210846}
   - {fileID: 359599296}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1457512625 stripped
 Transform:

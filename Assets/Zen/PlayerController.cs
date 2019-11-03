@@ -129,6 +129,8 @@ public class PlayerController : MonoBehaviour
             {
                 animator.Play("PlayerJumpAnticipation");
             }
+
+        
         }
         if (Input.GetButtonUp("Jump"))
         {
