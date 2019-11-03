@@ -22,11 +22,11 @@ public class Player : MonoBehaviour
         {
             playerImmortal = false;
         }
-        if (Input.GetKeyDown(KeyCode.Plus))
+        if (Input.GetKeyDown(KeyCode.RightBracket))
         {
             playerController.runSpeed *= 1.5f;
         }
-        if (Input.GetKeyDown(KeyCode.Minus))
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
             playerController.runSpeed /= 1.5f;
         }
