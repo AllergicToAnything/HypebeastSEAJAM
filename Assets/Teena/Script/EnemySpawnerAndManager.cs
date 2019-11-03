@@ -95,7 +95,12 @@ public class EnemySpawnerAndManager : MonoBehaviour
                         }
                         SpawnTimer = defSpawnTimer;
                         CycleCounter++;
-                        if (CycleCounter >= NumOfCycles)
+
+                        if (NumOfCycles < 0)
+                        {
+                            FinishedCycle = false;
+                        }
+                        else if (CycleCounter >= NumOfCycles)
                         {
                             CurrentWaveNum++;
                             if (CurrentWaveNum < spawnWaves.Length)
