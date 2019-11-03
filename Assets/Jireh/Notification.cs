@@ -15,8 +15,8 @@ public class Notification : MonoBehaviour
     private Vector3 velocity;
     private Vector3 objectCurrentPosition;
     private Vector3 objectTargetPosition;
-    private Vector3 startPos = new Vector3(0, 4, 10);
-    private Vector3 endPos = new Vector3(0, 6, 10);
+    public Vector3 startPos = new Vector3(0, 4, 0);
+    public Vector3 endPos = new Vector3(0, 6, 0);
 
     void Start()
     {
