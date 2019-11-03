@@ -31,7 +31,8 @@ public class NotificationConnector : MonoBehaviour
                 Vector3 localDif = transform.position - collider.transform.position;
                 localDif /= collider.transform.localScale.x;
                 AttachPivotToNotification(hit2D.rigidbody, localDif);
-                hit2D.rigidbody.bodyType = RigidbodyType2D.Dynamic;
+                if (hit2D.rigidbody != null)
+                    hit2D.rigidbody.bodyType = RigidbodyType2D.Dynamic;
             } else{
                 print("nothing found");
             }
