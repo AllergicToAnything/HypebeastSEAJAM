@@ -224,6 +224,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Die()
+    {
+
+    }
+
    
 
     public void Move(float move, bool crouch, bool jump)
