@@ -6,8 +6,9 @@ public class PlayerKillCode : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == GetComponent<PlayerController>().gameObject)
+        if (collision.gameObject.CompareTag("Player")==true)
         {
+           
             Destroy(collision.gameObject);
         }
     }
