@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548537009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3959999, y: 0.20700002, z: 0}
+  m_LocalPosition: {x: 0.258, y: 0.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5949278702418417688}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_JumpForce: 150
   jumpCD: 0.3
-  maxJumpForce: 800
-  addForcePerSecond: 200
+  maxJumpForce: 200
+  addForcePerSecond: 60
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 1
@@ -154,6 +154,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: PlayerController+BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  bullets: []
 --- !u!61 &6344969318923385822
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -91,34 +94,40 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (Input.GetButton("Jump"))
+        {
+
+            if (jumpCD > 0)
+            {
+                jumpCD -= Time.deltaTime;
+                if (addForcePerSecond < maxJumpForce)
+                {
+                    if (!addJumpForce)
+                    {
+                        m_JumpForce += addForcePerSecond * Time.deltaTime;
+                    }
+                    if (m_Grounded)
+                    {
+                        jump = true;
+                        if (jump)
+                        {
+                            addJumpForce = true;
+                            Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+
+                        }
+                    }
+                }
+            }
+            
+
+        }
+
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         if (m_Grounded)
         {
             if (Input.GetButton("Jump"))
             {
                 animator.Play("PlayerJumpAnticipation");
-                if (!addJumpForce)
-                {
-                    jump = true;
-                    if (jumpCD > 0 && addForcePerSecond < maxJumpForce)
-                    {
-                        jumpCD -= Time.deltaTime;
-                        m_JumpForce += addForcePerSecond * Time.deltaTime;
-                    }
-
-                    if (jumpCD <= 0)
-                    {
-                        runSpeed = 0;
-                    }
-                    runSpeed = initRunSpeed;
-                    if (jump)
-                    {
-                        addJumpForce = true;
-                        Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-
-                    }
-                }
             }
         }
         if (Input.GetButtonUp("Jump"))
@@ -139,19 +148,20 @@ public class PlayerController : MonoBehaviour
         if (m_Grounded)
         {
             m_Rigidbody2D.gravityScale = 1;
-            if (Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Horizontal") != 0&&!attack)
             {
                 animator.Play("PlayerWalking");
             }
-            if (Input.GetAxis("Horizontal") == 0)
+            if (Input.GetAxis("Horizontal") == 0&&!attack&& !Input.GetMouseButton(0))
             {
                 animator.Play("PlayerIdle");
             }
         }
-        else
+        else if (!m_Grounded && !attack)
         {
-                animator.Play("PlayerJumpHang");
+            animator.Play("PlayerJumpHang");
         }
+        
 
         if (ableToAttack)
         {
@@ -161,7 +171,10 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                
+                if(Input.GetAxis("Horizontal") == 0)
+                {
+                    animator.Play("PlayerAttack");
+                }
                 if (attackCD <= 0)
                 {
                     attack = true;
@@ -169,18 +182,43 @@ public class PlayerController : MonoBehaviour
                 if (attack)
                 {
                     Attack();
+                    if (Input.GetAxis("Horizontal") != 0)
+                    {
+                        animator.Play("PlayerAttack");
+                    }
+
                 }
             }
         }
 
     }
 
+    
+
+    public List<PlayerBullet> bullets = new List<PlayerBullet>();
+
     public void Attack()
     {
+
         GameObject bullet = Instantiate(playerBullet.gameObject, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
-        attack = false;
+        bullets.Add(bullet.GetComponent<PlayerBullet>());
+        foreach (PlayerBullet r in bullets)
+        {
+            PlayerBullet pBullet = bullet.GetComponent<PlayerBullet>();
+
+            if(pBullet)
+                pBullet.playerController = this;
+                pBullet.Projectile();
+
+        }
+        if (bullets.Count > 1)
+        {
+            bullets.RemoveAt(0);
+        }
+
         attackCD = initAttackCD;
-        animator.Play("PlayerAttack");
+        attack = false;
+
     }
 
    
