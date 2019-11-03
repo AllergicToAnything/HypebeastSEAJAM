@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6813812203991624758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.535495, y: 0.17448351, z: -150.4039}
+  m_LocalPosition: {x: 11.535495, y: 0.17448351, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 345317465}
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c984ee6c49b1e84aa3caedf742022f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnBasedOnPlayerDetect: 0
   spawnWaves: []
   iconSpriteList: {fileID: 11400000, guid: 78d690b603ad9694d9fb98c597447a5a, type: 2}
   enemyList: {fileID: 0}

@@ -2,6 +2,8 @@
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float jumpCD = 1;
     private bool addJumpForce = false;
     private float initJUMPCD;
-    public int hp;
+    public int hp = 20;
     [SerializeField] private float maxJumpForce = 50f;
     [SerializeField] private float addForcePerSecond = 1f;
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
     float initAttackCD;
     public GameObject bulletSpawner;
     public PlayerBullet playerBullet;
-
+    public Image hpImage;
 
     [Header("Events")]
     [Space]
@@ -95,6 +97,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(hpImage != null)
+        {
+            if (hp > 0)
+            {
+                float hpFill = hp / 20.0f;
+                Debug.Log(hpFill);
+                hpImage.fillAmount = hpFill;
+            }
+            else if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
         if (Input.GetButton("Jump"))
         {
 
