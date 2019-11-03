@@ -46,7 +46,7 @@ public class GirlClamp : MonoBehaviour
         glassCrackAnimation.gameObject.SetActive(true);
         yield return new WaitForSeconds(glassCrackDelay);
         glassCrackAnimation.SetBool("isFinished", true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene("Scene - Level 2");
     }
 

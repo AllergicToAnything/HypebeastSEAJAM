@@ -14,6 +14,8 @@ public class NotificationConnector : MonoBehaviour
 
     private Collider2D collider;
 
+    public NotificationSpawner spawner;
+
     void Start()
     {
         mainCam = Camera.main;
@@ -27,6 +29,8 @@ public class NotificationConnector : MonoBehaviour
         if (Input.GetMouseButtonDown(0)){
             RaycastHit2D hit2D = Physics2D.CircleCast(transform.position, 0.1f, Vector3.zero, 0.1f, ~(colliderMask));
             if (hit2D.collider != null){
+                spawner.StopAllCoroutines();
+                spawner.StartCoroutine(spawner.SpawnNotifications());
                 collider = hit2D.collider;
                 Vector3 localDif = transform.position - collider.transform.position;
                 localDif /= collider.transform.localScale.x;
@@ -61,7 +65,7 @@ public class NotificationConnector : MonoBehaviour
     }
     
     void DetachPivot(){
-        if (hingeJoint.connectedBody.transform.parent != null){
+        if (hingeJoint.connectedBody != null){
             hingeJoint.connectedBody.transform.parent = null;
         }
         hingeJoint.connectedBody = null;;

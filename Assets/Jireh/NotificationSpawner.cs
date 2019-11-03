@@ -55,7 +55,7 @@ public class NotificationSpawner : MonoBehaviour
         notificationClone = null;
     }
 
-    IEnumerator SpawnNotifications(){
+    public IEnumerator SpawnNotifications(){
         float progress = 0;
         
         while (progress < notificationSpawnTime){

@@ -587,6 +587,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: ableToAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: runSpeed
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: addForcePerSecond
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: attackCD
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: maxJumpForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5949278702418417688, guid: e6c28d1efcc791846ae3d96a39b7de6c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,36 +671,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.22700001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: ableToAttack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: runSpeed
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: addForcePerSecond
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: attackCD
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: maxJumpForce
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518301930121120636, guid: e6c28d1efcc791846ae3d96a39b7de6c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c28d1efcc791846ae3d96a39b7de6c, type: 3}
@@ -1047,7 +1047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &275530010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2666,7 +2666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &470948074
 Transform:
   m_ObjectHideFlags: 0
@@ -2675,7 +2675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470948073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.320885, y: 4.202416, z: -36.388134}
+  m_LocalPosition: {x: 76.320885, y: 83, z: -36.388134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1970612169}
@@ -2954,7 +2954,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2978,7 +2978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533882659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -199.53334, y: -2.4999998, z: -10}
+  m_LocalPosition: {x: -196.33334, y: 4.7000003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5292,13 +5292,13 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 5
+  m_Priority: 6
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 122348841}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 6
+    OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -5321,7 +5321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965513141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -199.53334, y: -2.4999998, z: -10}
+  m_LocalPosition: {x: -196.33334, y: 4.7000003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1036965994}
@@ -5387,8 +5387,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   notificationDuration: 2
   notificationSpawnTime: 5
-  yStart: 6
-  yEnd: 4
+  yStart: 10
+  yEnd: 8
   isSpawning: 1
 --- !u!114 &965513146
 MonoBehaviour:
@@ -5625,23 +5625,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.5
-  m_LookaheadSmoothing: 30
-  m_LookaheadIgnoreY: 1
+  m_LookaheadTime: 0
+  m_LookaheadSmoothing: 10
+  m_LookaheadIgnoreY: 0
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_ScreenX: 0.3
-  m_ScreenY: 0.5
+  m_ScreenX: 0.29
+  m_ScreenY: 0.86
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.302
-  m_DeadZoneHeight: 0.637
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 1
-  m_SoftZoneHeight: 1
+  m_SoftZoneWidth: 0.8
+  m_SoftZoneHeight: 0.8
   m_BiasX: 0
-  m_BiasY: -0.4999999
+  m_BiasY: 0
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
@@ -7044,7 +7044,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267651210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.2, y: -0.2, z: 10}
+  m_LocalPosition: {x: 8.61, y: -7.34, z: 10}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 965513143}
