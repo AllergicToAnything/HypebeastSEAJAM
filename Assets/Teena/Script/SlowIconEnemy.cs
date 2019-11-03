@@ -10,6 +10,11 @@ public class SlowIconEnemy : BaseEnemy
     bool Stop = false;
     bool DoOnce = false;
     
+    void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -30,8 +35,16 @@ public class SlowIconEnemy : BaseEnemy
     
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.CompareTag("Player") == true)
+        if (col.gameObject.CompareTag("Player") == true || col.gameObject.CompareTag("Notification") == true || col.gameObject.CompareTag("Ground") == true)
         {
+            if (col.gameObject.CompareTag("Player") == true)
+            {
+                if (col.gameObject.GetComponent<PlayerController>() != null)
+                {
+                    col.gameObject.GetComponent<PlayerController>().TakeDamage(enemyData.enemyDamage);
+                }
+            }
+
             Destroy(gameObject);
         }
     }

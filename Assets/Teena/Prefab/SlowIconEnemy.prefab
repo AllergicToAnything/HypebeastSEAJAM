@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 393403125823673018}
   m_Layer: 0
   m_Name: SlowIconEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   enemyPos: {x: 0, y: 0, z: 0}
   enemyData: {fileID: 11400000, guid: e61d722cd164eeb42b16a00e1d21b3fa, type: 2}
   target: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 393403127288845417}
   sprite: {fileID: 0}
   amplitude: 0.1
   frequency: 1

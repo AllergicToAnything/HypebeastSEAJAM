@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7608877951110223711}
   m_Layer: 0
   m_Name: FastIconEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,10 +96,11 @@ MonoBehaviour:
   enemyPos: {x: 0, y: 0, z: 0}
   enemyData: {fileID: 11400000, guid: 08ba63b8192855643aed2f7b0a7271d2, type: 2}
   target: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 7608877951781361416}
   sprite: {fileID: 0}
   amplitude: 0
   frequency: 0
+  DeathTimer: 50
 --- !u!1 &7608877951781361418
 GameObject:
   m_ObjectHideFlags: 0

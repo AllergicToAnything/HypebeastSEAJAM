@@ -13,7 +13,9 @@ public class SpawnWave
 
 public class EnemySpawnerAndManager : MonoBehaviour
 {
-    BaseEnemy[] SpawnedEnemies;
+    //BaseEnemy[] SpawnedEnemies;
+    public bool SpawnBasedOnPlayerDetect;
+    bool detected;
     public SpawnWave[] spawnWaves;
     public IconSpriteListData iconSpriteList;
     public EnemyListData enemyList;
@@ -30,11 +32,12 @@ public class EnemySpawnerAndManager : MonoBehaviour
     public bool FinishedCycle = false;
     public bool FinishedLocalCycle = false;
     public int FinalWaveInt = 0;
+    int CurrentWaveNum = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        SetWave(0);
+        SetWave(CurrentWaveNum);
     }
 
     void SetWave(int waveNum)
@@ -51,34 +54,69 @@ public class EnemySpawnerAndManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(FinishedCycle == false)
+        bool CanSpawn = false;
+
+        if(SpawnBasedOnPlayerDetect == true)
         {
-            if (SpawnBasedOnObservedFinished == true)
+            if(detected == true)
             {
-                if(CheckObserved() == true)
+                CanSpawn = true;
+            }
+        }
+        else
+        {
+            CanSpawn = true;
+        }
+
+        if(CanSpawn == true)
+        {
+            if (FinishedCycle == false)
+            {
+                if (SpawnBasedOnObservedFinished == true)
+                {
+                    if (CheckObserved() == true)
+                    {
+                        AllowSpawn = true;
+                    }
+                }
+                else
                 {
                     AllowSpawn = true;
                 }
-            }
-            else
-            {
-                AllowSpawn = true;
-            }
 
-            if(AllowSpawn == true)
-            {
-                SpawnTimer -= Time.deltaTime;
-                if (SpawnTimer <= 0.0f)
+                if (AllowSpawn == true)
                 {
-                    for (int i = 0; i < EnemyPerCycle; i++)
+                    SpawnTimer -= Time.deltaTime;
+                    if (SpawnTimer <= 0.0f)
                     {
-                        SpawnEnemy();
-                    }
-                    SpawnTimer = defSpawnTimer;
-                    CycleCounter++;
-                    if (CycleCounter >= NumOfCycles)
-                    {
-                        FinishedCycle = true;
+                        for (int i = 0; i < EnemyPerCycle; i++)
+                        {
+                            SpawnEnemy();
+                        }
+                        SpawnTimer = defSpawnTimer;
+                        CycleCounter++;
+                        if (CycleCounter >= NumOfCycles)
+                        {
+                            CurrentWaveNum++;
+                            if (CurrentWaveNum < spawnWaves.Length)
+                            {
+                                SetWave(CurrentWaveNum);
+                            }
+                            else if (FinalWaveInt != -1)
+                            {
+                                if (FinalWaveInt == CurrentWaveNum)
+                                {
+                                    FinishedCycle = true;
+                                }
+                            }
+                            else if (FinalWaveInt == -1)
+                            {
+                                if (CurrentWaveNum == spawnWaves.Length)
+                                {
+                                    FinishedCycle = true;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -115,5 +153,21 @@ public class EnemySpawnerAndManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Player") == true || col.gameObject.CompareTag("Notification") == true || col.gameObject.CompareTag("Ground") == true)
+        {
+            detected = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Player") == true || col.gameObject.CompareTag("Notification") == true || col.gameObject.CompareTag("Ground") == true)
+        {
+            detected = false;
+        }
     }
 }

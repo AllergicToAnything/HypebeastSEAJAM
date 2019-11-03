@@ -9,13 +9,7 @@ public class BaseEnemy : MonoBehaviour
     public GameObject target;
     public SpriteRenderer spriteRenderer;
     public Sprite sprite;
-
-    void Start()
-    {
-        target = GameObject.FindGameObjectWithTag("Player");
-        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-    }
-
+    
     public void SetSprite(Sprite sprite)
     {
         //spriteRenderer.sprite = sprite;
