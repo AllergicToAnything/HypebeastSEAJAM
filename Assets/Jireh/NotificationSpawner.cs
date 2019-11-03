@@ -20,8 +20,8 @@ public class NotificationSpawner : MonoBehaviour
 
     void Start () {
         mainCam = Camera.main;
-        startPos = new Vector3(0, yStart, 0);
-        endPos = new Vector3(0, yEnd, 0);
+        startPos = new Vector3(0, yStart, 10);
+        endPos = new Vector3(0, yEnd, 10);
         
         StartCoroutine(SpawnNotifications());
     }
@@ -41,14 +41,14 @@ public class NotificationSpawner : MonoBehaviour
 
     IEnumerator PushNotification(){
 
-        notificationClone = Instantiate(notificationPrefab, startPos, Quaternion.identity);
+        notificationClone = Instantiate(notificationPrefab, startPos, Quaternion.identity, this.transform);
         float lerpProgress = 0;
         while(lerpProgress/notificationDuration < 1){
             lerpProgress += Time.deltaTime;
-            print(lerpProgress);
+            // print(lerpProgress);
             float val = smoothEntry.Evaluate(lerpProgress/notificationDuration);
             Vector3 pos = Vector3.Lerp(startPos, endPos, val);
-            notificationClone.transform.position = pos;
+            notificationClone.transform.localPosition = pos;
             yield return null;
         }
 

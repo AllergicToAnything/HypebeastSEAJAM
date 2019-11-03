@@ -15,8 +15,8 @@ public class Notification : MonoBehaviour
     private Vector3 velocity;
     private Vector3 objectCurrentPosition;
     private Vector3 objectTargetPosition;
-    private Vector3 startPos = new Vector3(0, 4, 0);
-    private Vector3 endPos = new Vector3(0, 6, 0);
+    private Vector3 startPos = new Vector3(0, 4, 10);
+    private Vector3 endPos = new Vector3(0, 6, 10);
 
     void Start()
     {
@@ -83,7 +83,7 @@ public class Notification : MonoBehaviour
                 float lerpProgress = 0;
                 while (lerpProgress < 1){
                     lerpProgress += Time.deltaTime;
-                    transform.position = Vector3.Lerp(startPos, endPos, lerpProgress);
+                    transform.localPosition = Vector3.Lerp(startPos, endPos, lerpProgress);
                     yield return null;
                 }
                 Destroy(this.gameObject);

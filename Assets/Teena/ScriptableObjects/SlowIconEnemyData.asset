@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySprite: {fileID: 0}
   enemyDamage: 0
-  speed: 20
+  speed: 5
