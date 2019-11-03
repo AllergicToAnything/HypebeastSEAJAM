@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float jumpCD = 1;
     private bool addJumpForce = false;
     private float initJUMPCD;
+    public int hp;
     [SerializeField] private float maxJumpForce = 50f;
     [SerializeField] private float addForcePerSecond = 1f;
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -299,7 +300,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int dmgTaken)
     {
-
+        hp -= dmgTaken;
     }
 
     private void Flip()
