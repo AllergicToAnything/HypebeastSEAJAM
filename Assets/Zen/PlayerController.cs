@@ -295,6 +295,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int dmgTaken)
+    {
+
+    }
 
     private void Flip()
     {
