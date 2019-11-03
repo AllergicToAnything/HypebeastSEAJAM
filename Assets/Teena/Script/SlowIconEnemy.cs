@@ -18,21 +18,26 @@ public class SlowIconEnemy : BaseEnemy
     // Update is called once per frame
     void Update()
     {
-        if(DoOnce == false)
+        if (IsDying == false)
         {
-            spriteRenderer.sprite = sprite;
-        }
+            if (DoOnce == false)
+            {
+                spriteRenderer.sprite = sprite;
+            }
 
-        if (Stop == false && target != null)
+            if (Stop == false && target != null)
+            {
+                float step = enemyData.speed * Time.deltaTime;
+                tempPos = Vector3.MoveTowards(transform.position, target.transform.position, step);
+                tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+                transform.position = tempPos;
+            }
+        }
+        else if (IsDying == true)
         {
-            float step = enemyData.speed * Time.deltaTime;
-            tempPos = Vector3.MoveTowards(transform.position, target.transform.position, step);
-            tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
-            transform.position = tempPos;
+            DoDead();
         }
     }
-
-    
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player") == true || col.gameObject.CompareTag("Notification") == true || col.gameObject.CompareTag("Ground") == true)
@@ -45,12 +50,11 @@ public class SlowIconEnemy : BaseEnemy
                 }
             }
 
-            Destroy(gameObject);
+            if (col.gameObject.CompareTag("Notification") == true)
+            {
+                RandomizeClip();
+            }
+            IsDying = true;
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-
     }
 }
