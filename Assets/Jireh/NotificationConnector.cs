@@ -61,7 +61,9 @@ public class NotificationConnector : MonoBehaviour
     }
     
     void DetachPivot(){
-        hingeJoint.connectedBody.transform.parent = null;
+        if (hingeJoint.connectedBody.transform.parent != null){
+            hingeJoint.connectedBody.transform.parent = null;
+        }
         hingeJoint.connectedBody = null;;
         hingeJoint.connectedAnchor = Vector2.zero;
         
